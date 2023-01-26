@@ -2,6 +2,7 @@ package org.olebas.travel.app.model.entity.geography;
 
 import org.olebas.travel.app.infra.util.CommonUtil;
 import org.olebas.travel.app.model.entity.base.AbstractEntity;
+import org.olebas.travel.app.model.entity.transport.TransportType;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -12,6 +13,10 @@ public class City extends AbstractEntity {
     private String district;
     private String region;
     private Set<Station> stations;
+
+    public City(final String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -45,13 +50,14 @@ public class City extends AbstractEntity {
         this.stations = stations;
     }
 
-    public void addStation(final Station station) {
-        Objects.requireNonNull(station, "station parameter is not initialized");
+    public Station addStation(final TransportType transportType) {
         if (stations == null) {
             stations = new HashSet<>();
         }
+        Station station = new Station(this, transportType);
         stations.add(station);
-        station.setCity(this);
+
+        return station;
     }
 
     public void removeStation(Station station) {

@@ -3,12 +3,19 @@ package org.olebas.travel.app.model.entity.geography;
 import org.olebas.travel.app.model.entity.base.AbstractEntity;
 import org.olebas.travel.app.model.entity.transport.TransportType;
 
+import java.util.Objects;
+
 public class Station extends AbstractEntity {
     private City city;
     private Address address;
     private String phone;
     private Coordinate coordinate;
     private TransportType transportType;
+
+    public Station(final City city, final TransportType transportType) {
+        this.city = Objects.requireNonNull(city);
+        this.transportType = Objects.requireNonNull(transportType);
+    }
 
     public City getCity() {
         return city;
